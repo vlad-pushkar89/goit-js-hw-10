@@ -1,12 +1,19 @@
-.home {
+.section-snackbar {
+    font-size: 24px;
+}
+
+.home-snackbar {
     color: #F5DEB3;
 }
 
-.title {
+.title-snackbar {
+    display: flex;
+    justify-content: center;
     color: #4000ff;
+    margin: 32px 0 32px 0;
 }
 
-.greeting {
+.greeting-snackbar {
     color: #ffff00;
 }
 

@@ -1,0 +1,102 @@
+.section-timer {
+    font-size: 24px;
+}
+
+.home-timer {
+    color: #F5DEB3;
+}
+
+.title-timer {
+    display: flex;
+        justify-content: center;
+    color: #1a0000;
+    margin: 32px 0 32px 0;
+}
+
+.greeting-timer {
+    color: #cc0000;
+}
+
+.input-timer {
+    border: 1px solid #808080;
+    border-radius: 4px;
+    width: 272px;
+    height: 40px;
+    padding-left: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+    margin-left: 156px;
+}
+
+.input-timer:hover {
+    border: 1px solid #000000;
+}
+
+.input-timer:focus {
+    border: 1px solid #4e75ff;
+}
+
+.input-timer:disabled {
+    background: #fafafa;
+    color: #808080;
+}
+
+.btn-timer {
+    border-radius: 8px;
+    padding: 8px 16px;
+    width: 75px;
+    background: #4e75ff;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    border: none;
+}
+
+.btn-timer:disabled {
+    background: #cfcfcf;
+    color: #989898;
+    cursor: not-allowed;
+}
+
+.btn-timer:not(:disabled):hover {
+    background: #6c8cff;
+}
+
+.timer {
+    display: flex;
+    margin-top: 32px;
+    margin-left: 156px;
+}
+
+.timer:not(:last-child) {
+    gap: 24px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.value {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
+}
+
+.label {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #2e2f42;
+}
