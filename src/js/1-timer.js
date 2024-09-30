@@ -1,13 +1,13 @@
-const startButton = document.querySelector('[data-start]');
-const dateTimePicker = document.querySelector('#datetime-picker');
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+let userSelectedDate = null;
+const startBtn = document.querySelector('[data-start]');
 const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
-let countdownInterval = null;
-let userSelectedDate = null;
-
-startButton.disabled = true;
+const datetimePicker = document.getElementById('datetime-picker');
 
 const options = {
   enableTime: true,
@@ -21,39 +21,42 @@ const options = {
         title: 'Error',
         message: 'Please choose a date in the future',
       });
-      startButton.disabled = true;
+      startBtn.disabled = true;
     } else {
       userSelectedDate = selectedDate;
-      startButton.disabled = false;
+      startBtn.disabled = false;
     }
   },
 };
 
-flatpickr(dateTimePicker, options);
+flatpickr(datetimePicker, options);
 
-startButton.addEventListener('click', () => {
-  if (!userSelectedDate) return;
-  startButton.disabled = true;
-  dateTimePicker.disabled = true;
+function addLeadingZero(value) {
+  return String(value).padStart(2, '0');
+}
 
-  countdownInterval = setInterval(() => {
+function startTimer() {
+  const intervalId = setInterval(() => {
     const currentTime = new Date();
-    const timeDifference = userSelectedDate - currentTime;
+    const msRemaining = userSelectedDate - currentTime;
 
-    if (timeDifference <= 0) {
-      clearInterval(countdownInterval);
-      iziToast.success({ title: 'Success', message: 'Time is up!' });
-      updateTimer(0, 0, 0, 0);
-      dateTimePicker.disabled = false;
-      return;
+    if (msRemaining <= 0) {
+      clearInterval(intervalId);
+      updateTimerUI(0, 0, 0, 0);
+      iziToast.success({ title: 'Success', message: 'Countdown complete!' });
+      startBtn.disabled = true;
+      datetimePicker.disabled = false;
+    } else {
+      const { days, hours, minutes, seconds } = convertMs(msRemaining);
+      updateTimerUI(days, hours, minutes, seconds);
     }
-
-    const { days, hours, minutes, seconds } = convertMs(timeDifference);
-    updateTimer(days, hours, minutes, seconds);
   }, 1000);
-});
 
-function updateTimer(days, hours, minutes, seconds) {
+  startBtn.disabled = true;
+  datetimePicker.disabled = true;
+}
+
+function updateTimerUI(days, hours, minutes, seconds) {
   daysEl.textContent = addLeadingZero(days);
   hoursEl.textContent = addLeadingZero(hours);
   minutesEl.textContent = addLeadingZero(minutes);
@@ -74,6 +77,4 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function addLeadingZero(value) {
-  return String(value).padStart(2, '0');
-}
+startBtn.addEventListener('click', startTimer);
